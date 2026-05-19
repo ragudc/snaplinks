@@ -1,0 +1,46 @@
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/Users/ragudc/Desktop/Developer/Portfolio/snaplinks"
+      ],
+      "description": "Permite a Claude Code leer y escribir archivos del proyecto"
+    },
+    "fetch": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-fetch"],
+      "description": "HTTP requests para probar endpoints de la API interna y Supabase"
+    },
+    "sequential-thinking": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "description": "Razonamiento paso a paso para arquitectura de auth y RLS"
+    },
+    "supabase": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@supabase/mcp-server-supabase@latest",
+        "--access-token",
+        "YOUR_SUPABASE_PERSONAL_ACCESS_TOKEN"
+      ],
+      "description": "Interacción directa con el proyecto Supabase: tablas, RLS, SQL"
+    }
+  },
+  "permissions": {
+    "allow": [
+      "Bash(pnpm:*)",
+      "Bash(git:*)",
+      "Bash(npx:*)",
+      "Bash(node:*)",
+      "Bash(mkdir:*)",
+      "Bash(touch:*)",
+      "Bash(cat:*)",
+      "Bash(ls:*)"
+    ],
+    "deny": ["Bash(rm -rf /)", "Bash(sudo:*)"]
+  }
+}
