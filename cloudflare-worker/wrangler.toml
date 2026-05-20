@@ -1,0 +1,30 @@
+# ─── Identificación del Worker ────────────────────────────────────
+name            = "snaplinks-worker"
+main            = "src/index.ts"
+compatibility_date  = "2024-11-01"
+
+# ─── Workers.dev ─────────────────────────────────────────────────
+# El Worker estará disponible en:
+# https://snaplinks-worker.TU_SUBDOMINIO.workers.dev
+# No se requiere dominio personalizado para el portafolio.
+workers_dev = true
+
+# ─── Dominio personalizado (OPCIONAL — descomentar cuando tengas dominio) ──
+# Requiere que el dominio esté gestionado por Cloudflare DNS
+# [[routes]]
+# pattern  = "go.tudominio.com/*"
+# zone_name = "tudominio.com"
+
+# ─── Variables de entorno no sensibles ───────────────────────────
+# Las variables SENSIBLES (SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY)
+# se configuran como SECRETS con `wrangler secret put`
+# y localmente via `.dev.vars`
+
+# ─── Configuración de desarrollo local ───────────────────────────
+[dev]
+port           = 8787
+local_protocol = "http"
+
+# ─── Observability (logs en dashboard de Cloudflare) ─────────────
+[observability]
+enabled = true
