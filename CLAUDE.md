@@ -34,3 +34,4 @@
 @.claude/skills/08-accessibility.md
 @.claude/skills/09-supabase-patterns.md
 @.claude/skills/10-auth-patterns.md
+@.claude/skills/11-i18n-language.md

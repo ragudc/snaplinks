@@ -39,6 +39,7 @@ export interface Database {
           is_active?:  boolean
           updated_at?: string
         }
+        Relationships: []
       }
       link_clicks: {
         Row: {
@@ -59,7 +60,16 @@ export interface Database {
           referrer?:    string | null
           user_agent?:  string | null
         }
-        Update: never
+        Update: {
+          id?:          number
+          link_id?:     string
+          clicked_at?:  string
+          country?:     string | null
+          device_type?: "mobile" | "desktop" | "tablet" | "unknown" | null
+          referrer?:    string | null
+          user_agent?:  string | null
+        }
+        Relationships: []
       }
     }
     Views: {
@@ -77,6 +87,7 @@ export interface Database {
           clicks_30d:   number
           clicks_24h:   number
         }
+        Relationships: []
       }
     }
     Functions: Record<string, never>
