@@ -2,13 +2,61 @@ import { NextRequest, NextResponse } from "next/server"
 import { createServerSupabaseClient, createServiceClient } from "@/lib/supabase/server"
 import { generateSlug, isValidSlugFormat } from "@/lib/utils/slug"
 import { validateUrl, normalizeUrl } from "@/lib/utils/url-validator"
-import type { CreateLinkInput, CreateLinkResponse } from "@/types/link"
+import type { CreateLinkInput, CreateLinkResponse, LinksListResponse } from "@/types/link"
 import type { Database } from "@/types/database"
 
 type LinkInsert = Database["public"]["Tables"]["links"]["Insert"]
 
 const MAX_SLUG_RETRIES = 5
+const DEFAULT_PER_PAGE = 20
+const MAX_PER_PAGE     = 100
 
+// ─── GET /api/links — Lista paginada del usuario autenticado ──────
+export async function GET(request: NextRequest): Promise<NextResponse> {
+  const supabase = await createServerSupabaseClient()
+  const { data: { user } } = await supabase.auth.getUser()
+
+  if (!user) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+  }
+
+  const { searchParams } = new URL(request.url)
+  const search  = searchParams.get("q")?.trim() ?? ""
+  const page    = Math.max(0, parseInt(searchParams.get("page")  ?? "0", 10))
+  const perPage = Math.min(
+    MAX_PER_PAGE,
+    Math.max(1, parseInt(searchParams.get("limit") ?? String(DEFAULT_PER_PAGE), 10))
+  )
+
+  let query = supabase
+    .from("link_stats")
+    .select("*", { count: "exact" })
+    .eq("user_id", user.id)
+    .order("created_at", { ascending: false })
+    .range(page * perPage, (page + 1) * perPage - 1)
+
+  if (search) {
+    query = query.or(`url.ilike.%${search}%,title.ilike.%${search}%,slug.ilike.%${search}%`)
+  }
+
+  const { data, error, count } = await query
+
+  if (error) {
+    console.error("GET /api/links error:", error)
+    return NextResponse.json({ error: "Failed to load links." }, { status: 500 })
+  }
+
+  const response: LinksListResponse = {
+    links:   data ?? [],
+    count:   count ?? 0,
+    page,
+    perPage,
+  }
+
+  return NextResponse.json(response)
+}
+
+// ─── POST /api/links — Crear link ─────────────────────────────────
 export async function POST(request: NextRequest): Promise<NextResponse> {
   let body: CreateLinkInput
 
