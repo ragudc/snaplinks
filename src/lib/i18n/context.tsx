@@ -3,9 +3,8 @@
 import {
   createContext,
   useContext,
-  useState,
-  useEffect,
   useCallback,
+  useSyncExternalStore,
   type ReactNode,
 } from "react"
 import { en, type Translations } from "@/lib/i18n/en"
@@ -27,26 +26,34 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | null>(null)
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  // SSR-safe: always init to "en" to avoid hydration mismatch
-  const [language, setLanguageState] = useState<Language>(DEFAULT_LANG)
+function getLanguageSnapshot(): Language {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY)
+    if (saved === "en" || saved === "es") return saved
+  } catch {
+    // localStorage unavailable
+  }
+  return DEFAULT_LANG
+}
 
-  // Read saved preference after mount (client-side only)
-  useEffect(() => {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY) as Language | null
-      if (saved === "en" || saved === "es") {
-        setLanguageState(saved)
-      }
-    } catch {
-      // localStorage unavailable in some contexts
-    }
-  }, [])
+function subscribeToLanguage(callback: () => void): () => void {
+  window.addEventListener("storage", callback)
+  return () => window.removeEventListener("storage", callback)
+}
+
+export function LanguageProvider({ children }: { children: ReactNode }) {
+  // useSyncExternalStore: client reads localStorage, server always returns DEFAULT_LANG
+  const language = useSyncExternalStore(
+    subscribeToLanguage,
+    getLanguageSnapshot,
+    () => DEFAULT_LANG,
+  )
 
   const setLanguage = useCallback((lang: Language) => {
-    setLanguageState(lang)
     try {
       localStorage.setItem(STORAGE_KEY, lang)
+      // Dispatch storage event so useSyncExternalStore re-reads the snapshot
+      window.dispatchEvent(new StorageEvent("storage", { key: STORAGE_KEY, newValue: lang }))
     } catch {
       // Silence localStorage error
     }
