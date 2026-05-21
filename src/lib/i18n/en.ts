@@ -1,5 +1,5 @@
 export const en = {
-  // ─── Common UI elements ────────────────────────────────────────
+  // --- Common UI elements ----------------------------------------
   common: {
     copy:          "Copy",
     copied:        "Copied!",
@@ -32,7 +32,7 @@ export const en = {
     required:      "Required",
   },
 
-  // ─── Navigation ────────────────────────────────────────────────
+  // --- Navigation ------------------------------------------------
   nav: {
     home:          "Home",
     dashboard:     "Dashboard",
@@ -45,7 +45,7 @@ export const en = {
     closeMenu:     "Close menu",
   },
 
-  // ─── Landing page ──────────────────────────────────────────────
+  // --- Landing page ----------------------------------------------
   landing: {
     hero: {
       badge:         "Free URL Shortener",
@@ -118,7 +118,7 @@ export const en = {
     },
   },
 
-  // ─── Auth pages ────────────────────────────────────────────────
+  // --- Auth pages ------------------------------------------------
   auth: {
     signIn: {
       title:               "Welcome back",
@@ -154,7 +154,7 @@ export const en = {
     },
   },
 
-  // ─── Dashboard ─────────────────────────────────────────────────
+  // --- Dashboard -------------------------------------------------
   dashboard: {
     title:             "My Links",
     subtitle:          "Manage and track all your short links.",
@@ -190,7 +190,7 @@ export const en = {
     },
   },
 
-  // ─── Analytics ─────────────────────────────────────────────────
+  // --- Analytics -------------------------------------------------
   analytics: {
     title:        "Link Analytics",
     totalClicks:  "Total Clicks",
@@ -211,7 +211,7 @@ export const en = {
     },
   },
 
-  // ─── Error messages ────────────────────────────────────────────
+  // --- Error messages --------------------------------------------
   errors: {
     urlRequired:  "Please enter a URL.",
     urlInvalid:   "Please enter a valid URL starting with https:// or http://",
@@ -228,7 +228,7 @@ export const en = {
     unknownError: "An unexpected error occurred. Please try again.",
   },
 
-  // ─── Footer ────────────────────────────────────────────────────
+  // --- Footer ----------------------------------------------------
   footer: {
     tagline:   "Fast, free URL shortening with analytics.",
     links: {
@@ -241,7 +241,7 @@ export const en = {
     copyright: "All rights reserved.",
   },
 
-  // ─── Theme & Language toggles ──────────────────────────────────
+  // --- Theme & Language toggles ----------------------------------
   ui: {
     toggleTheme:    "Toggle theme",
     toggleLanguage: "Switch to Spanish",

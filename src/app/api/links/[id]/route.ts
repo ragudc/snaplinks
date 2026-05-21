@@ -8,7 +8,7 @@ type LinkUpdate = Database["public"]["Tables"]["links"]["Update"]
 
 type RouteContext = { params: Promise<{ id: string }> }
 
-// ─── Helper: verificar que el link pertenece al usuario ───────────
+// --- Helper: verificar que el link pertenece al usuario -----------
 async function verifyLinkOwnership(linkId: string, userId: string) {
   const supabase = await createServerSupabaseClient()
   const { data } = await supabase
@@ -22,7 +22,7 @@ async function verifyLinkOwnership(linkId: string, userId: string) {
   return { ok: true, status: 200, error: null }
 }
 
-// ─── GET /api/links/:id ───────────────────────────────────────────
+// --- GET /api/links/:id -------------------------------------------
 export async function GET(_req: NextRequest, { params }: RouteContext): Promise<NextResponse> {
   const { id }   = await params
   const supabase = await createServerSupabaseClient()
@@ -48,7 +48,7 @@ export async function GET(_req: NextRequest, { params }: RouteContext): Promise<
   return NextResponse.json(data)
 }
 
-// ─── PUT /api/links/:id ───────────────────────────────────────────
+// --- PUT /api/links/:id -------------------------------------------
 export async function PUT(request: NextRequest, { params }: RouteContext): Promise<NextResponse> {
   const { id }   = await params
   const supabase = await createServerSupabaseClient()
@@ -103,7 +103,7 @@ export async function PUT(request: NextRequest, { params }: RouteContext): Promi
   return NextResponse.json(data)
 }
 
-// ─── DELETE /api/links/:id ────────────────────────────────────────
+// --- DELETE /api/links/:id ----------------------------------------
 export async function DELETE(_req: NextRequest, { params }: RouteContext): Promise<NextResponse> {
   const { id }   = await params
   const supabase = await createServerSupabaseClient()

@@ -23,7 +23,7 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-sm">
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
 
-        {/* ── Logo ─────────────────────────────────────────────── */}
+        {/* -- Logo ----------------------------------------------- */}
         <Link
           href="/"
           className="flex items-center gap-2 font-semibold text-foreground hover:opacity-80 transition-opacity"
@@ -33,7 +33,7 @@ export function Header() {
           <span className="text-base tracking-tight">SnapLinks</span>
         </Link>
 
-        {/* ── Desktop nav ──────────────────────────────────────── */}
+        {/* -- Desktop nav ---------------------------------------- */}
         <nav className="hidden md:flex items-center gap-1" aria-label="Main navigation">
           <Button variant="ghost" size="sm" asChild>
             <Link href="/">{t.nav.home}</Link>
@@ -43,7 +43,7 @@ export function Header() {
           </Button>
         </nav>
 
-        {/* ── Desktop actions ───────────────────────────────────── */}
+        {/* -- Desktop actions ------------------------------------- */}
         <div className="hidden md:flex items-center gap-1">
           <LanguageToggle />
           <ThemeToggle />
@@ -77,7 +77,7 @@ export function Header() {
           )}
         </div>
 
-        {/* ── Mobile actions ───────────────────────────────────── */}
+        {/* -- Mobile actions ------------------------------------- */}
         <div className="flex md:hidden items-center gap-2">
           <LanguageToggle />
           <ThemeToggle />
@@ -106,7 +106,7 @@ export function Header() {
         </div>
       </div>
 
-      {/* ── Mobile menu ──────────────────────────────────────────── */}
+      {/* -- Mobile menu -------------------------------------------- */}
       {menuOpen && (
         <div className="md:hidden border-t border-border/40 bg-background px-4 pb-4 pt-2">
           <nav className="flex flex-col gap-1" aria-label="Mobile navigation">

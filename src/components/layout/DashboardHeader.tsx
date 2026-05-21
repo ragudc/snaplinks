@@ -6,18 +6,16 @@ import { Menu, Zap } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
-import { Sidebar } from "@/components/layout/Sidebar"
-import { useUser } from "@/hooks/useUser"
+import { Sidebar, type ServerUser } from "@/components/layout/Sidebar"
 
-/**
- * DashboardHeader — Barra superior visible solo en mobile (< lg).
- * En desktop el Sidebar fijo sustituye este header.
- */
-export function DashboardHeader() {
-  const { user } = useUser()
+interface DashboardHeaderProps {
+  serverUser?: ServerUser
+}
+
+export function DashboardHeader({ serverUser }: DashboardHeaderProps) {
   const [open, setOpen] = useState(false)
 
-  const initials = user?.email?.slice(0, 2).toUpperCase() ?? "U"
+  const initials = serverUser?.initials ?? "U"
 
   return (
     <header className="sticky top-0 z-40 flex h-14 items-center justify-between border-b border-border bg-background px-4 lg:hidden">
@@ -34,7 +32,7 @@ export function DashboardHeader() {
             </Button>
           </SheetTrigger>
           <SheetContent side="left" className="w-64 p-0">
-            <Sidebar onNavigate={() => setOpen(false)} />
+            <Sidebar onNavigate={() => setOpen(false)} serverUser={serverUser} />
           </SheetContent>
         </Sheet>
 

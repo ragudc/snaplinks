@@ -16,20 +16,35 @@ export function useUser(): UseUserReturn {
 
   useEffect(() => {
     const supabase = createClient()
+    let mounted = true
+
+    // Safety net: stop loading after 3 seconds regardless of auth state
+    const maxTimer = setTimeout(() => {
+      if (mounted) setIsLoading(false)
+    }, 3000)
 
     supabase.auth.getUser().then(({ data }) => {
-      setUser(data.user)
-      setIsLoading(false)
+      if (mounted) {
+        setUser(data.user)
+        clearTimeout(maxTimer)
+        setIsLoading(false)
+      }
     })
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, session) => {
-        setUser(session?.user ?? null)
-        if (event === "SIGNED_OUT") setIsLoading(false)
+      (_, session) => {
+        if (mounted) {
+          setUser(session?.user ?? null)
+          setIsLoading(false) // always clear loading on any auth event
+        }
       }
     )
 
-    return () => subscription.unsubscribe()
+    return () => {
+      mounted = false
+      clearTimeout(maxTimer)
+      subscription.unsubscribe()
+    }
   }, [])
 
   const signOut = async () => {

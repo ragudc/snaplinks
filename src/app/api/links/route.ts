@@ -11,7 +11,7 @@ const MAX_SLUG_RETRIES = 5
 const DEFAULT_PER_PAGE = 20
 const MAX_PER_PAGE     = 100
 
-// ─── GET /api/links — Lista paginada del usuario autenticado ──────
+// --- GET /api/links — Lista paginada del usuario autenticado ------
 export async function GET(request: NextRequest): Promise<NextResponse> {
   const supabase = await createServerSupabaseClient()
   const { data: { user } } = await supabase.auth.getUser()
@@ -56,7 +56,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
   return NextResponse.json(response)
 }
 
-// ─── POST /api/links — Crear link ─────────────────────────────────
+// --- POST /api/links — Crear link ---------------------------------
 export async function POST(request: NextRequest): Promise<NextResponse> {
   let body: CreateLinkInput
 

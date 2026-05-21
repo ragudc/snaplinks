@@ -2,15 +2,22 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Zap, Link2, BarChart2, Settings, LogOut } from "lucide-react"
+import { Zap, Link2, BarChart2, Settings, LogOut, ArrowLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Separator } from "@/components/ui/separator"
-import { useUser } from "@/hooks/useUser"
+import { createClient } from "@/lib/supabase/client"
 import { cn } from "@/lib/utils"
+
+export interface ServerUser {
+  email:       string
+  displayName: string
+  initials:    string
+}
 
 interface SidebarProps {
   onNavigate?: () => void
+  serverUser?: ServerUser
 }
 
 const NAV_ITEMS = [
@@ -19,14 +26,14 @@ const NAV_ITEMS = [
   { href: "/dashboard/settings",  icon: Settings,  label: "Settings"   },
 ] as const
 
-export function Sidebar({ onNavigate }: SidebarProps) {
+export function Sidebar({ onNavigate, serverUser }: SidebarProps) {
   const pathname = usePathname()
-  const { user, isLoading, signOut } = useUser()
 
-  const initials    = user?.email?.slice(0, 2).toUpperCase() ?? "U"
-  const displayName = (user?.user_metadata?.full_name as string | undefined)
-    ?? user?.email?.split("@")[0]
-    ?? "User"
+  async function signOut() {
+    const supabase = createClient()
+    await supabase.auth.signOut()
+    window.location.href = "/"
+  }
 
   return (
     <div className="flex h-full flex-col">
@@ -41,7 +48,7 @@ export function Sidebar({ onNavigate }: SidebarProps) {
 
       <Separator />
 
-      {/* Navegación */}
+      {/* Navigation */}
       <nav className="flex-1 overflow-y-auto px-2 py-3" aria-label="Dashboard navigation">
         <ul className="flex flex-col gap-0.5" role="list">
           {NAV_ITEMS.map(({ href, icon: Icon, label }) => {
@@ -72,20 +79,36 @@ export function Sidebar({ onNavigate }: SidebarProps) {
         </ul>
       </nav>
 
+      {/* Back to Home — always visible, outside scrollable nav */}
+      <div className="px-2 py-2">
+        <Link
+          href="/"
+          onClick={onNavigate}
+          className={cn(
+            "flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium",
+            "transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+            "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+          )}
+        >
+          <ArrowLeft className="h-4 w-4 shrink-0" aria-hidden="true" />
+          Back to Home
+        </Link>
+      </div>
+
       <Separator />
 
-      {/* User info + Sign Out */}
+      {/* User info + Sign Out — server data, no loading state */}
       <div className="p-3">
-        {!isLoading && user && (
+        {serverUser && (
           <div className="flex items-center gap-3 rounded-md p-2">
             <Avatar className="h-8 w-8 shrink-0">
               <AvatarFallback className="text-xs bg-primary/10 text-primary font-semibold">
-                {initials}
+                {serverUser.initials}
               </AvatarFallback>
             </Avatar>
             <div className="flex-1 overflow-hidden">
-              <p className="text-sm font-medium leading-tight truncate">{displayName}</p>
-              <p className="text-xs text-muted-foreground truncate">{user.email}</p>
+              <p className="text-sm font-medium leading-tight truncate">{serverUser.displayName}</p>
+              <p className="text-xs text-muted-foreground truncate">{serverUser.email}</p>
             </div>
             <Button
               variant="ghost"

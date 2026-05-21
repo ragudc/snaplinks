@@ -84,7 +84,7 @@ export function LinkShortener() {
 
   return (
     <div className="w-full max-w-2xl mx-auto flex flex-col gap-6">
-      {/* ── Input form ─────────────────────────────────────────── */}
+      {/* -- Input form ------------------------------------------- */}
       <form onSubmit={handleSubmit} noValidate aria-label={t.landing.hero.badge}>
         <div className="flex flex-col gap-3 sm:flex-row sm:gap-2">
           <div className="flex-1 flex flex-col gap-1.5">
@@ -150,7 +150,7 @@ export function LinkShortener() {
         </p>
       </form>
 
-      {/* ── Result card ────────────────────────────────────────── */}
+      {/* -- Result card ------------------------------------------ */}
       {formState === "success" && result && (
         <Card
           ref={resultRef}

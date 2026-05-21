@@ -33,7 +33,7 @@ export default function LandingPage() {
       <Header />
 
       <main className="flex-1">
-        {/* ── Hero ─────────────────────────────────────────────────── */}
+        {/* -- Hero --------------------------------------------------- */}
         <section
           className="relative flex flex-col items-center gap-8 px-4 py-20 text-center sm:px-6 md:py-28 lg:py-36"
           aria-labelledby="hero-title"
@@ -67,7 +67,7 @@ export default function LandingPage() {
 
         <Separator />
 
-        {/* ── Features ─────────────────────────────────────────────── */}
+        {/* -- Features ----------------------------------------------- */}
         <section
           className="px-4 py-16 sm:px-6 md:py-24"
           aria-labelledby="features-title"
@@ -111,7 +111,7 @@ export default function LandingPage() {
 
         <Separator />
 
-        {/* ── How it works ─────────────────────────────────────────── */}
+        {/* -- How it works ------------------------------------------- */}
         <section
           className="px-4 py-16 sm:px-6 md:py-24"
           aria-labelledby="how-title"
@@ -160,7 +160,7 @@ export default function LandingPage() {
 
         <Separator />
 
-        {/* ── CTA ──────────────────────────────────────────────────── */}
+        {/* -- CTA ---------------------------------------------------- */}
         <section
           className="px-4 py-16 sm:px-6 md:py-24"
           aria-labelledby="cta-title"

@@ -28,7 +28,7 @@ import {
   type SignUpInput,
 } from "@/lib/utils/auth-schemas"
 
-// ─── Google OAuth Button ──────────────────────────────────────────
+// --- Google OAuth Button ------------------------------------------
 
 function GoogleButton({
   label,
@@ -70,7 +70,7 @@ function GoogleButton({
   )
 }
 
-// ─── Sign In Form ─────────────────────────────────────────────────
+// --- Sign In Form -------------------------------------------------
 
 function SignInForm() {
   const router = useRouter()
@@ -210,7 +210,7 @@ function SignInForm() {
   )
 }
 
-// ─── Sign Up Form ─────────────────────────────────────────────────
+// --- Sign Up Form -------------------------------------------------
 
 function SignUpForm() {
   const { t } = useTranslation()
@@ -364,7 +364,7 @@ function SignUpForm() {
   )
 }
 
-// ─── Login Page ───────────────────────────────────────────────────
+// --- Login Page ---------------------------------------------------
 
 function LoginPageContent() {
   const searchParams = useSearchParams()

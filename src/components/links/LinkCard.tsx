@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { ExternalLink, MoreVertical, Pencil, Trash2 } from "lucide-react"
+import { BarChart2, ExternalLink, MoreVertical, Pencil, Trash2 } from "lucide-react"
 import { toast } from "sonner"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -140,7 +140,15 @@ export function LinkCard({ link, onUpdate, onDelete, onToggle }: LinkCardProps) 
                   <MoreVertical className="h-4 w-4" aria-hidden="true" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-40">
+              <DropdownMenuContent align="end" className="w-44">
+                <DropdownMenuItem
+                  onClick={() => {
+                    window.location.href = `/dashboard/analytics/${link.link_id}`
+                  }}
+                >
+                  <BarChart2 className="mr-2 h-4 w-4" aria-hidden="true" />
+                  {t.dashboard.link.viewAnalytics}
+                </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => setEditOpen(true)}>
                   <Pencil className="mr-2 h-4 w-4" aria-hidden="true" />
                   {t.common.edit}
