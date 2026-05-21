@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { Suspense, useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -366,7 +366,7 @@ function SignUpForm() {
 
 // ─── Login Page ───────────────────────────────────────────────────
 
-export default function LoginPage() {
+function LoginPageContent() {
   const searchParams = useSearchParams()
   const { t } = useTranslation()
   const defaultTab = searchParams.get("tab") === "signup" ? "signup" : "signin"
@@ -449,5 +449,13 @@ export default function LoginPage() {
         </Card>
       </div>
     </div>
+  )
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense>
+      <LoginPageContent />
+    </Suspense>
   )
 }
