@@ -71,6 +71,50 @@ export interface Database {
         }
         Relationships: []
       }
+      subscriptions: {
+        Row: {
+          id:                     string
+          user_id:                string
+          plan:                   "free" | "plus" | "pro"
+          status:                 "active" | "cancelled" | "suspended" | "expired"
+          paypal_subscription_id: string | null
+          paypal_plan_id:         string | null
+          current_period_start:   string
+          current_period_end:     string
+          cancel_at_period_end:   boolean
+          cancelled_at:           string | null
+          created_at:             string
+          updated_at:             string
+        }
+        Insert: {
+          id?:                     string
+          user_id:                 string
+          plan:                    "free" | "plus" | "pro"
+          status?:                 "active" | "cancelled" | "suspended" | "expired"
+          paypal_subscription_id?: string | null
+          paypal_plan_id?:         string | null
+          current_period_start:    string
+          current_period_end:      string
+          cancel_at_period_end?:   boolean
+          cancelled_at?:           string | null
+          created_at?:             string
+          updated_at?:             string
+        }
+        Update: {
+          id?:                     string
+          user_id?:                string
+          plan?:                   "free" | "plus" | "pro"
+          status?:                 "active" | "cancelled" | "suspended" | "expired"
+          paypal_subscription_id?: string | null
+          paypal_plan_id?:         string | null
+          current_period_start?:   string
+          current_period_end?:     string
+          cancel_at_period_end?:   boolean
+          cancelled_at?:           string | null
+          updated_at?:             string
+        }
+        Relationships: []
+      }
     }
     Views: {
       link_stats: {
