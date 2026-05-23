@@ -56,7 +56,7 @@ export function Footer() {
 
           {/* Developer info */}
           <div className="flex flex-col gap-2">
-            <p className="text-foreground text-xs font-medium">Built by</p>
+            <p className="text-foreground text-xs font-medium">{t.footer.builtBy}</p>
             <div className="flex flex-col gap-1.5">
               <span className="text-xs"> Roberto Agudelo </span>
               <a

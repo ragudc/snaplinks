@@ -17,6 +17,7 @@ import { Header }    from "@/components/layout/Header"
 import { PayPalSubscriptionButton } from "@/components/checkout/PayPalSubscriptionButton"
 import { PLANS }     from "@/types/subscription"
 import { checkoutSchema, type CheckoutInput } from "@/lib/utils/checkout-schemas"
+import { useTranslation } from "@/lib/i18n"
 
 const PAYPAL_PLAN_IDS: Record<string, string> = {
   plus: process.env.NEXT_PUBLIC_PAYPAL_PLAN_ID_PLUS ?? "P-8DM56493D86352247NIHZNEA",
@@ -25,20 +26,20 @@ const PAYPAL_PLAN_IDS: Record<string, string> = {
 
 function SuccessScreen({ planName }: { planName: string }) {
   const router = useRouter()
+  const { t } = useTranslation()
   return (
     <div className="flex min-h-screen flex-col items-center justify-center gap-6 px-4 text-center">
       <div className="flex h-20 w-20 items-center justify-center rounded-full bg-primary/10">
         <CheckCircle2 className="h-10 w-10 text-primary" aria-hidden="true" />
       </div>
       <div className="flex flex-col gap-2">
-        <h1 className="text-2xl font-bold">You&apos;re all set! 🎉</h1>
+        <h1 className="text-2xl font-bold">{t.checkout.success.title}</h1>
         <p className="text-muted-foreground max-w-sm">
-          Your <strong>SnapLinks {planName}</strong> plan is now active.
-          Welcome to the full experience!
+          {t.checkout.success.message.replace("{plan}", planName)}
         </p>
       </div>
       <Button size="lg" onClick={() => router.push("/dashboard")}>
-        Go to Dashboard
+        {t.checkout.success.goToDashboard}
       </Button>
     </div>
   )
@@ -49,6 +50,7 @@ function CheckoutContent() {
   const planId       = searchParams.get("plan") ?? "plus"
   const plan         = PLANS.find((p) => p.id === planId)
   const paypalPlanId = PAYPAL_PLAN_IDS[planId]
+  const { t } = useTranslation()
 
   const [isSuccess, setIsSuccess] = useState(false)
 
@@ -65,9 +67,9 @@ function CheckoutContent() {
   if (!plan || plan.price === 0) {
     return (
       <div className="flex min-h-screen flex-col items-center justify-center gap-4 px-4">
-        <p className="text-muted-foreground">Invalid plan selected.</p>
+        <p className="text-muted-foreground">{t.checkout.invalidPlan}</p>
         <Button asChild variant="outline">
-          <Link href="/pricing">← View Pricing</Link>
+          <Link href="/pricing">{t.checkout.viewPricing}</Link>
         </Button>
       </div>
     )
@@ -96,7 +98,7 @@ function CheckoutContent() {
           >
             <Link href="/pricing">
               <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-              Back to Pricing
+              {t.checkout.backToPricing}
             </Link>
           </Button>
 
@@ -106,7 +108,7 @@ function CheckoutContent() {
 
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-lg">Your Information</CardTitle>
+                  <CardTitle className="text-lg">{t.checkout.yourInfo}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <form
@@ -115,7 +117,7 @@ function CheckoutContent() {
                     aria-label="Personal information form"
                   >
                     <div className="flex flex-col gap-1.5">
-                      <Label htmlFor="firstName">First Name</Label>
+                      <Label htmlFor="firstName">{t.checkout.firstName}</Label>
                       <Input
                         id="firstName"
                         type="text"
@@ -139,7 +141,7 @@ function CheckoutContent() {
                     </div>
 
                     <div className="flex flex-col gap-1.5">
-                      <Label htmlFor="lastName">Last Name</Label>
+                      <Label htmlFor="lastName">{t.checkout.lastName}</Label>
                       <Input
                         id="lastName"
                         type="text"
@@ -163,7 +165,7 @@ function CheckoutContent() {
                     </div>
 
                     <div className="flex flex-col gap-1.5">
-                      <Label htmlFor="email">Email Address</Label>
+                      <Label htmlFor="email">{t.checkout.emailAddress}</Label>
                       <Input
                         id="email"
                         type="email"
@@ -193,13 +195,12 @@ function CheckoutContent() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-lg">
                     <Shield className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
-                    Secure Payment
+                    {t.checkout.securePayment}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="flex flex-col gap-3">
                   <p className="text-xs text-muted-foreground">
-                    Click the PayPal button to complete your subscription.
-                    You&apos;ll be redirected to PayPal to authorize the payment securely.
+                    {t.checkout.paypalDesc}
                   </p>
 
                   {paypalPlanId ? (
@@ -221,7 +222,7 @@ function CheckoutContent() {
                     </PayPalScriptProvider>
                   ) : (
                     <p className="text-xs text-destructive">
-                      PayPal is not configured. Check environment variables.
+                      {t.checkout.paypalNotConfig}
                     </p>
                   )}
                 </CardContent>
@@ -231,7 +232,7 @@ function CheckoutContent() {
             <aside className="md:col-span-2">
               <Card className="sticky top-20">
                 <CardHeader>
-                  <CardTitle className="text-base">Order Summary</CardTitle>
+                  <CardTitle className="text-base">{t.checkout.orderSummary}</CardTitle>
                 </CardHeader>
                 <CardContent className="flex flex-col gap-4">
 
@@ -239,7 +240,7 @@ function CheckoutContent() {
                     <div>
                       <p className="font-semibold">SnapLinks {plan.name}</p>
                       <p className="text-xs text-muted-foreground mt-0.5">
-                        Monthly subscription — billed via PayPal
+                        {t.checkout.monthlyBilling}
                       </p>
                     </div>
                     <Badge variant="secondary">{plan.name}</Badge>
@@ -248,11 +249,11 @@ function CheckoutContent() {
                   <Separator />
 
                   <div className="flex items-center justify-between">
-                    <span className="text-sm">Monthly total</span>
+                    <span className="text-sm">{t.checkout.monthlyTotal}</span>
                     <span className="font-bold text-lg">
                       ${plan.price}.00
                       <span className="text-sm font-normal text-muted-foreground">
-                        {" "}/mo
+                        {" "}{t.checkout.perMonth}
                       </span>
                     </span>
                   </div>
@@ -270,15 +271,13 @@ function CheckoutContent() {
 
                   <div className="rounded-md bg-muted/50 p-3">
                     <p className="text-xs text-muted-foreground leading-relaxed">
-                      <strong className="text-foreground">Cancel anytime.</strong>{" "}
-                      If you cancel, you&apos;ll only be charged for the days you&apos;ve
-                      actually used. Any remaining credit is calculated and shown
-                      before confirming.
+                      <strong className="text-foreground">{t.checkout.cancelAnytime}</strong>{" "}
+                      {t.checkout.cancelDesc}
                     </p>
                   </div>
 
                   <Button variant="ghost" size="sm" asChild className="w-full">
-                    <Link href="/pricing">Choose a different plan</Link>
+                    <Link href="/pricing">{t.checkout.chooseDifferent}</Link>
                   </Button>
                 </CardContent>
               </Card>

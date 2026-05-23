@@ -296,9 +296,36 @@ export const en = {
     unknownError: "An unexpected error occurred. Please try again.",
   },
 
+  // --- Checkout page --------------------------------------------
+  checkout: {
+    backToPricing:   "Back to Pricing",
+    invalidPlan:     "Invalid plan selected.",
+    viewPricing:     "← View Pricing",
+    yourInfo:        "Your Information",
+    firstName:       "First Name",
+    lastName:        "Last Name",
+    emailAddress:    "Email Address",
+    securePayment:   "Secure Payment",
+    paypalDesc:      "Click the PayPal button to complete your subscription. You'll be redirected to PayPal to authorize the payment securely.",
+    paypalNotConfig: "PayPal is not configured. Check environment variables.",
+    orderSummary:    "Order Summary",
+    monthlyBilling:  "Monthly subscription — billed via PayPal",
+    monthlyTotal:    "Monthly total",
+    perMonth:        "/mo",
+    cancelAnytime:   "Cancel anytime.",
+    cancelDesc:      "If you cancel, you'll only be charged for the days you've actually used. Any remaining credit is calculated and shown before confirming.",
+    chooseDifferent: "Choose a different plan",
+    success: {
+      title:        "You're all set! 🎉",
+      message:      "Your SnapLinks {plan} plan is now active. Welcome to the full experience!",
+      goToDashboard: "Go to Dashboard",
+    },
+  },
+
   // --- Footer ----------------------------------------------------
   footer: {
     tagline:   "Fast, free URL shortening with analytics.",
+    builtBy:   "Built by",
     links: {
       privacy:  "Privacy Policy",
       terms:    "Terms of Service",
