@@ -76,7 +76,7 @@ export interface Database {
           id:                     string
           user_id:                string
           plan:                   "free" | "plus" | "pro"
-          status:                 "active" | "cancelled" | "suspended" | "expired"
+          status:                 "active" | "cancelled" | "expired" | "pending" | "suspended"
           paypal_subscription_id: string | null
           paypal_plan_id:         string | null
           current_period_start:   string
@@ -90,7 +90,7 @@ export interface Database {
           id?:                     string
           user_id:                 string
           plan:                    "free" | "plus" | "pro"
-          status?:                 "active" | "cancelled" | "suspended" | "expired"
+          status?:                 "active" | "cancelled" | "expired" | "pending" | "suspended"
           paypal_subscription_id?: string | null
           paypal_plan_id?:         string | null
           current_period_start:    string
@@ -104,7 +104,7 @@ export interface Database {
           id?:                     string
           user_id?:                string
           plan?:                   "free" | "plus" | "pro"
-          status?:                 "active" | "cancelled" | "suspended" | "expired"
+          status?:                 "active" | "cancelled" | "expired" | "pending" | "suspended"
           paypal_subscription_id?: string | null
           paypal_plan_id?:         string | null
           current_period_start?:   string
