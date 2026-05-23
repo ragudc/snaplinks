@@ -200,6 +200,17 @@ export const es: Translations = {
       tablet:  "Tablet",
       unknown: "Otro",
     },
+    overview: {
+      title:        "Analytics",
+      subtitle:     "Resumen de rendimiento en todos tus links.",
+      totalLinks:   "Total de Links",
+      viewDetails:  "Ver Detalles",
+      noLinks:      "Sin links aún",
+      noLinksHint:  "Crea tu primer link para comenzar a rastrear el rendimiento.",
+      topLinks:     "Links con Mejor Rendimiento",
+      linkColumn:   "Link",
+      clicksColumn: "Clics totales",
+    },
   },
   pricing: {
     badge:    "Precios simples y transparentes",

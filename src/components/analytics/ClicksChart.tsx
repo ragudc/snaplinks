@@ -7,6 +7,7 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
 import { useTranslation } from "@/lib/i18n"
+import { useChartColors } from "@/hooks/useChartColors"
 import { formatChartHour } from "@/lib/utils/analytics-utils"
 import { cn } from "@/lib/utils"
 import type { ClicksByHour } from "@/types/analytics"
@@ -18,7 +19,7 @@ export function ClicksChartSkeleton() {
         <Skeleton className="h-5 w-40" />
       </CardHeader>
       <CardContent>
-        <Skeleton className="h-[180px] md:h-[220px] w-full rounded-lg" />
+        <Skeleton className="h-45 md:h-55 w-full rounded-lg" />
       </CardContent>
     </Card>
   )
@@ -51,7 +52,8 @@ interface ClicksChartProps {
 }
 
 export function ClicksChart({ data, className }: ClicksChartProps) {
-  const { t } = useTranslation()
+  const { t }  = useTranslation()
+  const colors = useChartColors()
 
   const maxClicks = Math.max(...data.map(d => d.clicks), 0)
 
@@ -64,7 +66,7 @@ export function ClicksChart({ data, className }: ClicksChartProps) {
         </CardTitle>
       </CardHeader>
       <CardContent className="pb-5">
-        <div className="h-[180px] md:h-[220px] w-full">
+        <div className="h-45 md:h-55 w-full">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
               data={data}
@@ -72,14 +74,14 @@ export function ClicksChart({ data, className }: ClicksChartProps) {
             >
               <CartesianGrid
                 strokeDasharray="3 3"
-                stroke="hsl(var(--border))"
+                stroke={colors.border}
                 vertical={false}
               />
 
               <XAxis
                 dataKey="hour"
                 tickFormatter={formatChartHour}
-                tick={{ fill: "hsl(var(--muted-foreground))", fontSize: 10 }}
+                tick={{ fill: colors.mutedForeground, fontSize: 10 }}
                 tickLine={false}
                 axisLine={false}
                 interval={5}
@@ -87,7 +89,7 @@ export function ClicksChart({ data, className }: ClicksChartProps) {
 
               <YAxis
                 allowDecimals={false}
-                tick={{ fill: "hsl(var(--muted-foreground))", fontSize: 11 }}
+                tick={{ fill: colors.mutedForeground, fontSize: 11 }}
                 tickLine={false}
                 axisLine={false}
                 width={32}
@@ -95,7 +97,7 @@ export function ClicksChart({ data, className }: ClicksChartProps) {
 
               <Tooltip
                 content={<CustomTooltip />}
-                cursor={{ fill: "hsl(var(--accent))", opacity: 0.5 }}
+                cursor={{ fill: colors.accent, opacity: 0.5 }}
               />
 
               <Bar dataKey="clicks" radius={[3, 3, 0, 0]}>
@@ -104,8 +106,8 @@ export function ClicksChart({ data, className }: ClicksChartProps) {
                     key={`cell-${entry.hour}`}
                     fill={
                       entry.clicks === maxClicks && maxClicks > 0
-                        ? "hsl(var(--primary))"
-                        : "hsl(var(--primary) / 0.35)"
+                        ? colors.primary
+                        : colors.primarySubtle
                     }
                   />
                 ))}

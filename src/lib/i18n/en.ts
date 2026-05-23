@@ -209,6 +209,17 @@ export const en = {
       tablet:  "Tablet",
       unknown: "Other",
     },
+    overview: {
+      title:        "Analytics",
+      subtitle:     "Performance overview across all your links.",
+      totalLinks:   "Total Links",
+      viewDetails:  "View Details",
+      noLinks:      "No links yet",
+      noLinksHint:  "Create your first short link to start tracking performance.",
+      topLinks:     "Top Performing Links",
+      linkColumn:   "Link",
+      clicksColumn: "All-time Clicks",
+    },
   },
 
   // --- Pricing page ----------------------------------------------
