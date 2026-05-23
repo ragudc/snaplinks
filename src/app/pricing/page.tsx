@@ -2,10 +2,10 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { Check, Zap } from "lucide-react"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
-import { Badge }    from "@/components/ui/badge"
-import { Button }   from "@/components/ui/button"
-import { Header }   from "@/components/layout/Header"
-import { Footer }   from "@/components/layout/Footer"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Header } from "@/components/layout/Header"
+import { Footer } from "@/components/layout/Footer"
 import { PLANS, type PlanConfig } from "@/types/subscription"
 import { cn } from "@/lib/utils"
 
@@ -17,30 +17,25 @@ export const metadata: Metadata = {
 
 function PricingCard({ plan }: { plan: PlanConfig }) {
   const isFree = plan.price === 0
-  const href   = isFree
-    ? "/login?tab=signup"
-    : `/checkout?plan=${plan.id}`
+  const href = isFree ? "/login?tab=signup" : `/checkout?plan=${plan.id}`
 
   return (
     <Card
       className={cn(
-        "relative flex flex-col transition-all duration-200",
+        "relative flex h-full flex-col transition-all duration-200",
         plan.highlighted
-          ? [
-              "border-primary shadow-xl shadow-primary/10",
-              "lg:scale-105 lg:-translate-y-1",
-            ]
-          : "border-border hover:shadow-md hover:-translate-y-0.5"
+          ? "border-primary shadow-primary/10 shadow-xl"
+          : "border-border hover:shadow-md"
       )}
     >
       {plan.badge && (
-        <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-10">
+        <div className="absolute top-3 left-1/2 z-10 -translate-x-1/2">
           <Badge
             className={cn(
               "px-3 py-0.5 text-xs font-semibold whitespace-nowrap shadow-sm",
               plan.highlighted
                 ? "bg-primary text-primary-foreground"
-                : "bg-muted text-muted-foreground border border-border"
+                : "bg-muted text-muted-foreground border-border border"
             )}
           >
             {plan.badge}
@@ -50,15 +45,13 @@ function PricingCard({ plan }: { plan: PlanConfig }) {
 
       <CardHeader className="pt-8 pb-4 text-center">
         <h3 className="text-xl font-bold">{plan.name}</h3>
-        <p className="text-sm text-muted-foreground mt-1 min-h-[2.5rem]">
+        <p className="text-muted-foreground mt-1 min-h-10 text-sm">
           {plan.description}
         </p>
 
         <div className="mt-5 flex items-end justify-center gap-1">
           {isFree ? (
-            <span className="text-4xl font-extrabold tracking-tight">
-              Free
-            </span>
+            <span className="text-4xl font-extrabold tracking-tight">Free</span>
           ) : (
             <>
               <span className="text-4xl font-extrabold tracking-tight">
@@ -70,19 +63,14 @@ function PricingCard({ plan }: { plan: PlanConfig }) {
         </div>
       </CardHeader>
 
-      <CardContent className="flex-1 pt-0 pb-6 px-6">
+      <CardContent className="flex-1 px-6 pt-0 pb-6">
         <ul className="flex flex-col gap-2.5" role="list">
           {plan.features.map((feature) => (
-            <li
-              key={feature}
-              className="flex items-start gap-2.5 text-sm"
-            >
+            <li key={feature} className="flex items-start gap-2.5 text-sm">
               <Check
                 className={cn(
-                  "h-4 w-4 shrink-0 mt-0.5",
-                  plan.highlighted
-                    ? "text-primary"
-                    : "text-muted-foreground"
+                  "mt-0.5 h-4 w-4 shrink-0",
+                  plan.highlighted ? "text-primary" : "text-muted-foreground"
                 )}
                 aria-hidden="true"
               />
@@ -92,7 +80,7 @@ function PricingCard({ plan }: { plan: PlanConfig }) {
         </ul>
       </CardContent>
 
-      <CardFooter className="pt-0 pb-6 px-6">
+      <CardFooter className="px-6 pt-0 pb-6">
         <Button
           asChild
           className="w-full"
@@ -112,8 +100,7 @@ export default function PricingPage() {
       <Header />
 
       <main className="flex-1">
-
-        <section className="py-14 md:py-20 text-center border-b border-border">
+        <section className="border-border border-b py-14 text-center md:py-20">
           <div className="mx-auto max-w-2xl px-4 sm:px-6">
             <div className="mb-4 flex justify-center">
               <Badge variant="secondary" className="gap-1.5 px-3 py-1 text-xs">
@@ -122,28 +109,25 @@ export default function PricingPage() {
               </Badge>
             </div>
 
-            <h1 className="text-3xl xs:text-4xl md:text-5xl font-extrabold tracking-tight">
-              Start free.{" "}
-              <span className="text-primary">Upgrade</span> when you&apos;re ready.
+            <h1 className="xs:text-4xl text-3xl font-extrabold tracking-tight md:text-5xl">
+              Start free. <span className="text-primary">Upgrade</span> when
+              you&apos;re ready.
             </h1>
 
-            <p className="mt-4 text-base md:text-lg text-muted-foreground max-w-xl mx-auto">
-              No hidden fees. No contracts. Cancel anytime and only pay for
-              the days you&apos;ve used.
+            <p className="text-muted-foreground mx-auto mt-4 max-w-xl text-base md:text-lg">
+              No hidden fees. No contracts. Cancel anytime and only pay for the
+              days you&apos;ve used.
             </p>
           </div>
         </section>
 
-        <section
-          className="py-14 md:py-20"
-          aria-labelledby="pricing-heading"
-        >
+        <section className="py-14 md:py-20" aria-labelledby="pricing-heading">
           <h2 id="pricing-heading" className="sr-only">
             Pricing plans
           </h2>
 
           <div className="mx-auto max-w-5xl px-4 sm:px-6">
-            <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 lg:items-start lg:pt-6">
+            <div className="grid grid-cols-1 gap-6 pt-8 lg:grid-cols-3 lg:items-stretch">
               {PLANS.map((plan) => (
                 <PricingCard key={plan.id} plan={plan} />
               ))}
@@ -151,9 +135,9 @@ export default function PricingPage() {
           </div>
         </section>
 
-        <section className="border-t border-border py-12 md:py-16 bg-muted/20">
+        <section className="border-border bg-muted/20 border-t py-12 md:py-16">
           <div className="mx-auto max-w-2xl px-4 sm:px-6">
-            <h2 className="text-xl font-semibold text-center mb-8">
+            <h2 className="mb-8 text-center text-xl font-semibold">
               Common Questions
             </h2>
 
@@ -176,9 +160,12 @@ export default function PricingPage() {
                   a: "Annual billing with a 20% discount is coming soon. Stay tuned!",
                 },
               ].map(({ q, a }) => (
-                <div key={q} className="border-b border-border pb-4 last:border-0">
-                  <p className="font-medium text-sm">{q}</p>
-                  <p className="mt-1.5 text-sm text-muted-foreground leading-relaxed">
+                <div
+                  key={q}
+                  className="border-border border-b pb-4 last:border-0"
+                >
+                  <p className="text-sm font-medium">{q}</p>
+                  <p className="text-muted-foreground mt-1.5 text-sm leading-relaxed">
                     {a}
                   </p>
                 </div>
@@ -186,7 +173,6 @@ export default function PricingPage() {
             </div>
           </div>
         </section>
-
       </main>
 
       <Footer />
