@@ -211,6 +211,74 @@ export const en = {
     },
   },
 
+  // --- Pricing page ----------------------------------------------
+  pricing: {
+    badge:    "Simple, transparent pricing",
+    srOnly:   "Pricing plans",
+    perMonth: "/month",
+    hero: {
+      title:          "Start free.",
+      titleHighlight: "Upgrade",
+      titleEnd:       "when you're ready.",
+      subtitle:       "No hidden fees. No contracts. Cancel anytime and only pay for the days you've used.",
+    },
+    plans: {
+      free: {
+        name:        "Free",
+        description: "Perfect for getting started with link shortening.",
+        badge:       "",
+        cta:         "Get Started",
+        features: {
+          f1: "Up to 5 links per month",
+          f2: "Basic click counter",
+          f3: "QR code generation",
+          f4: "Links never expire",
+          f5: "",
+          f6: "",
+        },
+      },
+      plus: {
+        name:        "Plus",
+        description: "Full analytics and unlimited links for creators.",
+        badge:       "Most Popular",
+        cta:         "Start Plus",
+        features: {
+          f1: "Unlimited short links",
+          f2: "Full analytics dashboard",
+          f3: "Custom slugs",
+          f4: "Click tracking by country & device",
+          f5: "QR code with branding",
+          f6: "Email support",
+        },
+      },
+      pro: {
+        name:        "Pro",
+        description: "Advanced features for teams and businesses.",
+        badge:       "Best Value",
+        cta:         "Start Pro",
+        features: {
+          f1: "Everything in Plus",
+          f2: "Team access (up to 5 members)",
+          f3: "Custom domain support",
+          f4: "API access",
+          f5: "Advanced analytics export",
+          f6: "Priority support",
+        },
+      },
+    },
+    faq: {
+      title: "Common Questions",
+      q1:    "Can I cancel anytime?",
+      a1:    "Yes — cancel anytime from your dashboard. You'll only be charged for the days you've actually used. Any remaining credit is calculated and shown to you before confirming.",
+      q2:    "Is my payment information secure?",
+      a2:    "Absolutely. All payments are processed securely through PayPal. SnapLinks never stores your card details.",
+      q3:    "What happens to my links if I downgrade?",
+      a3:    "Your existing links stay active forever. If you exceed the Free plan's monthly limit, new link creation pauses until the next billing cycle.",
+      q4:    "Do you offer annual billing?",
+      a4:    "Annual billing with a 20% discount is coming soon. Stay tuned!",
+    },
+  },
+
   // --- Error messages --------------------------------------------
   errors: {
     urlRequired:  "Please enter a URL.",
