@@ -49,12 +49,14 @@ export const en = {
   landing: {
     hero: {
       badge:         "Free URL Shortener",
-      title:         "Shorten your links in seconds",
-      subtitle:      "Create short, shareable URLs with click analytics and QR codes — free forever. No signup required.",
+      title:         "Shorten. Share. Track.",
+      subtitle:      "Create short links with edge-speed redirects and real-time analytics. No sign-up needed.",
       placeholder:   "Paste your long URL here... (e.g. https://example.com/very/long/path)",
       button:        "Shorten URL",
       buttonLoading: "Shortening...",
       hint:          "No account required. Start shortening instantly.",
+      noSignupBadge: "No sign-up required",
+      viewDashboard: "View Dashboard",
     },
     result: {
       title:         "Your link is ready! 🎉",
@@ -87,6 +89,18 @@ export const en = {
           title: "Free Forever",
           desc:  "Create links without an account. Sign up to unlock analytics, custom slugs, and more.",
         },
+        edgeSpeed: {
+          title: "Edge Speed",
+          desc:  "Redirects in < 10ms via Cloudflare Workers. Always fast, globally distributed.",
+        },
+        realAnalytics: {
+          title: "Real Analytics",
+          desc:  "Track clicks, countries, and device types in real time. Know your audience.",
+        },
+        freeToStart: {
+          title: "Free to Start",
+          desc:  "5 links/month, no credit card required. Upgrade only when you need more.",
+        },
       },
     },
     howItWorks: {
@@ -109,6 +123,10 @@ export const en = {
           desc:   "Copy the link, share via QR code, or post it on social media.",
         },
       },
+    },
+    pricing: {
+      title:    "Simple, transparent pricing",
+      subtitle: "Start free. Upgrade when you're ready. No contracts, cancel anytime.",
     },
     cta: {
       title:    "Ready for full analytics?",

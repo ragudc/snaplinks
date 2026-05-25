@@ -46,12 +46,14 @@ export const es: Translations = {
   landing: {
     hero: {
       badge:         "Acortador de URLs gratis",
-      title:         "Acorta tus links en segundos",
-      subtitle:      "Crea URLs cortas con analytics de clics y códigos QR — gratis para siempre. Sin registro.",
+      title:         "Acorta. Comparte. Rastrea.",
+      subtitle:      "Crea links cortos con redirecciones ultrarrápidas y analytics en tiempo real. Sin registro.",
       placeholder:   "Pega tu URL larga aquí... (ej: https://ejemplo.com/ruta/muy/larga)",
       button:        "Acortar URL",
       buttonLoading: "Acortando...",
       hint:          "Sin cuenta requerida. Comienza a acortar al instante.",
+      noSignupBadge: "Sin registro requerido",
+      viewDashboard: "Ver Panel",
     },
     result: {
       title:         "¡Tu link está listo! 🎉",
@@ -84,6 +86,18 @@ export const es: Translations = {
           title: "Gratis Para Siempre",
           desc:  "Crea links sin cuenta. Regístrate para desbloquear analytics, slugs personalizados y más.",
         },
+        edgeSpeed: {
+          title: "Velocidad Edge",
+          desc:  "Redirecciones en < 10ms via Cloudflare Workers. Siempre rápido, distribuido globalmente.",
+        },
+        realAnalytics: {
+          title: "Analytics Reales",
+          desc:  "Rastrea clics, países y tipos de dispositivo en tiempo real. Conoce tu audiencia.",
+        },
+        freeToStart: {
+          title: "Gratis para Empezar",
+          desc:  "5 links/mes, sin tarjeta de crédito. Mejora solo cuando necesites más.",
+        },
       },
     },
     howItWorks: {
@@ -106,6 +120,10 @@ export const es: Translations = {
           desc:   "Copia el link, comparte el código QR, o publícalo en redes sociales.",
         },
       },
+    },
+    pricing: {
+      title:    "Precios simples y transparentes",
+      subtitle: "Empieza gratis. Mejora cuando estés listo. Sin contratos, cancela cuando quieras.",
     },
     cta: {
       title:    "¿Listo para ver analytics completos?",

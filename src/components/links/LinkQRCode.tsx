@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react"
 import QRCode from "qrcode"
+import { useTheme } from "next-themes"
 import { Download } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
@@ -16,8 +17,11 @@ interface LinkQRCodeProps {
 
 export function LinkQRCode({ url, size = 200, className }: LinkQRCodeProps) {
   const { t } = useTranslation()
+  const { resolvedTheme } = useTheme()
   const [dataUrl, setDataUrl] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
+
+  const isDark = resolvedTheme === "dark"
 
   useEffect(() => {
     let cancelled = false
@@ -26,7 +30,10 @@ export function LinkQRCode({ url, size = 200, className }: LinkQRCodeProps) {
     QRCode.toDataURL(url, {
       width:         size,
       margin:        2,
-      color:         { dark: "#000000", light: "#ffffff" },
+      color:         {
+        dark:  isDark ? "#e5e5e5" : "#000000",
+        light: isDark ? "#1c1c1c" : "#ffffff",
+      },
       errorCorrectionLevel: "M",
     })
       .then((result) => {
@@ -40,7 +47,7 @@ export function LinkQRCode({ url, size = 200, className }: LinkQRCodeProps) {
       })
 
     return () => { cancelled = true }
-  }, [url, size])
+  }, [url, size, isDark])
 
   const handleDownload = useCallback(() => {
     if (!dataUrl) return
@@ -62,8 +69,7 @@ export function LinkQRCode({ url, size = 200, className }: LinkQRCodeProps) {
           className="rounded-lg"
         />
       ) : dataUrl ? (
-        // White background ensures QR is readable in dark mode
-        <div className="rounded-lg border border-border bg-white p-3 shadow-sm">
+        <div className="rounded-lg border border-border bg-background p-3 shadow-sm">
           <img
             src={dataUrl}
             alt={`QR code for ${url}`}

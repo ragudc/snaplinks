@@ -1,30 +1,36 @@
-# ─── Identificación del Worker ────────────────────────────────────
-name            = "snaplinks-worker"
-main            = "src/index.ts"
-compatibility_date  = "2024-11-01"
+# ─── Worker identity ─────────────────────────────────────────────
+name               = "snaplinks-worker"
+main               = "src/index.ts"
+compatibility_date = "2024-11-01"
 
-# ─── Workers.dev ─────────────────────────────────────────────────
-# El Worker estará disponible en:
-# https://snaplinks-worker.TU_SUBDOMINIO.workers.dev
-# No se requiere dominio personalizado para el portafolio.
+# ─── Workers.dev deployment ───────────────────────────────────────
+# The Worker is available at:
+# https://snaplinks-worker.YOUR_SUBDOMAIN.workers.dev
 workers_dev = true
 
-# ─── Dominio personalizado (OPCIONAL — descomentar cuando tengas dominio) ──
-# Requiere que el dominio esté gestionado por Cloudflare DNS
+# ─── Secrets (set via `wrangler secret put`, never stored here) ───
+# SUPABASE_URL             — Supabase project URL
+# SUPABASE_SERVICE_ROLE_KEY — Supabase service role key
+# NEXT_APP_URL             — Production Next.js app URL
+#
+# To set each secret:
+#   wrangler secret put SUPABASE_URL
+#   wrangler secret put SUPABASE_SERVICE_ROLE_KEY
+#   wrangler secret put NEXT_APP_URL
+
+# ─── Custom domain (optional — uncomment when you have a domain) ──
+# Requires the domain to be managed by Cloudflare DNS.
 # [[routes]]
-# pattern  = "go.tudominio.com/*"
-# zone_name = "tudominio.com"
+# pattern   = "go.yourdomain.com/*"
+# zone_name = "yourdomain.com"
 
-# ─── Variables de entorno no sensibles ───────────────────────────
-# Las variables SENSIBLES (SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY)
-# se configuran como SECRETS con `wrangler secret put`
-# y localmente via `.dev.vars`
-
-# ─── Configuración de desarrollo local ───────────────────────────
+# ─── Local development ────────────────────────────────────────────
+# Copy .dev.vars.example to .dev.vars and fill in credentials.
+# Run: wrangler dev --local
 [dev]
 port           = 8787
 local_protocol = "http"
 
-# ─── Observability (logs en dashboard de Cloudflare) ─────────────
+# ─── Observability ────────────────────────────────────────────────
 [observability]
 enabled = true

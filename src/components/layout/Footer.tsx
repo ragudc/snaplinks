@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { Link2, Mail } from "lucide-react"
 import { Separator } from "@/components/ui/separator"
+import { ThemeToggle } from "@/components/layout/ThemeToggle"
 import { useTranslation } from "@/lib/i18n"
 
 function GitHubIcon({ className }: { className?: string }) {
@@ -49,16 +50,45 @@ export function Footer() {
               <Link2 className="text-primary h-4 w-4" aria-hidden="true" />
               <span className="text-sm tracking-tight">SnapLinks</span>
             </Link>
-            <p className="text-muted-foreground max-w-[220px] text-xs">
+            <p className="text-muted-foreground max-w-55 text-xs">
               {t.footer.tagline}
             </p>
           </div>
 
+          {/* Navigation links */}
+          <nav className="flex flex-col gap-2" aria-label="Footer navigation">
+            <p className="text-foreground text-xs font-medium">
+              {t.nav.home.toUpperCase()}
+            </p>
+            <div className="flex flex-col gap-1.5">
+              <Link
+                href="/"
+                className="text-muted-foreground hover:text-foreground text-xs transition-colors"
+              >
+                {t.nav.home}
+              </Link>
+              <Link
+                href="/dashboard"
+                className="text-muted-foreground hover:text-foreground text-xs transition-colors"
+              >
+                {t.nav.dashboard}
+              </Link>
+              <Link
+                href="/login"
+                className="text-muted-foreground hover:text-foreground text-xs transition-colors"
+              >
+                {t.nav.login}
+              </Link>
+            </div>
+          </nav>
+
           {/* Developer info */}
           <div className="flex flex-col gap-2">
-            <p className="text-foreground text-xs font-medium">{t.footer.builtBy}</p>
+            <p className="text-foreground text-xs font-medium">
+              {t.footer.builtBy}
+            </p>
             <div className="flex flex-col gap-1.5">
-              <span className="text-xs"> Roberto Agudelo </span>
+              <span className="text-xs">Roberto Agudelo</span>
               <a
                 href="https://github.com/ragudc"
                 target="_blank"
@@ -82,7 +112,7 @@ export function Footer() {
                 className="text-muted-foreground hover:text-foreground flex w-fit items-center gap-1.5 text-xs transition-colors"
               >
                 <Mail className="h-3.5 w-3.5" aria-hidden="true" />
-                email: robertoagudeloc@gmail.com
+                robertoagudeloc@gmail.com
               </a>
             </div>
           </div>
@@ -91,30 +121,33 @@ export function Footer() {
         <Separator className="my-6" />
 
         {/* Bottom row */}
-        <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-muted-foreground text-xs">
             © {year} SnapLinks. {t.footer.copyright}
           </p>
-          <p className="text-muted-foreground text-xs">
-            {t.footer.poweredBy}{" "}
-            <a
-              href="https://supabase.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-foreground underline underline-offset-2 transition-colors"
-            >
-              Supabase
-            </a>
-            {" & "}
-            <a
-              href="https://nextjs.org"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-foreground underline underline-offset-2 transition-colors"
-            >
-              Next.js
-            </a>
-          </p>
+          <div className="flex items-center gap-3">
+            <p className="text-muted-foreground text-xs">
+              {t.footer.poweredBy}{" "}
+              <a
+                href="https://supabase.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-foreground underline underline-offset-2 transition-colors"
+              >
+                Supabase
+              </a>
+              {" & "}
+              <a
+                href="https://nextjs.org"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-foreground underline underline-offset-2 transition-colors"
+              >
+                Next.js
+              </a>
+            </p>
+            <ThemeToggle />
+          </div>
         </div>
       </div>
     </footer>

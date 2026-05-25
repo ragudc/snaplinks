@@ -18,32 +18,37 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default:  "SnapLinks — Free URL Shortener with Analytics",
+    default:  "SnapLinks — Smart URL Shortener with Analytics",
     template: "%s | SnapLinks",
   },
   description:
-    "Shorten URLs instantly. Get click analytics, QR codes, and custom slugs — free forever. No signup required to start.",
+    "Shorten URLs, track clicks, and analyze your audience. Free URL shortener with real-time analytics powered by Cloudflare Edge.",
   keywords: [
     "url shortener", "link shortener", "short links",
     "click analytics", "qr code generator", "free url shortener",
-    "custom slug", "link management",
+    "bitly alternative", "link management", "cloudflare workers",
   ],
   authors:      [{ name: "SnapLinks" }],
   creator:      "SnapLinks",
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"
   ),
+  icons: {
+    icon:  "/favicon.ico",
+    apple: "/apple-icon",
+  },
   openGraph: {
-    title:       "SnapLinks — Free URL Shortener with Analytics",
-    description: "Shorten URLs instantly with click analytics and QR codes.",
-    type:        "website",
-    locale:      "en_US",
+    title:       "SnapLinks — Smart URL Shortener",
+    description: "Shorten URLs and track every click with real-time analytics.",
+    url:         process.env.NEXT_PUBLIC_APP_URL ?? "https://snaplinks.vercel.app",
     siteName:    "SnapLinks",
+    locale:      "en_US",
+    type:        "website",
   },
   twitter: {
     card:        "summary_large_image",
-    title:       "SnapLinks — Free URL Shortener with Analytics",
-    description: "Shorten URLs instantly with click analytics and QR codes.",
+    title:       "SnapLinks — Smart URL Shortener",
+    description: "Shorten URLs and track every click.",
   },
   robots: { index: true, follow: true },
 }
